@@ -11,10 +11,9 @@ function CustomButton({
   return (
     <button
       disabled={false}
-      type={"button"}
+      type={btnType || "button"}
       className={`custom-btn ${containerStyle}`}
       onClick={handleClick}
-      // btntype={btnType ||'button'}
     >
       <span className={`flex-1`}>{title}</span>
     </button>
