@@ -8,10 +8,12 @@
 
 # testing
 /coverage
+/utils/FetchApi.ts
 
 # next.js
 /.next/
 /out/
+
 
 # production
 /build
