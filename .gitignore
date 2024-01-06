@@ -8,7 +8,7 @@
 
 # testing
 /coverage
-/utils/FetchApi.ts
+/utils/apikey.ts
 
 # next.js
 /.next/
