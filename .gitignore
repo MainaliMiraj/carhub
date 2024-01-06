@@ -8,7 +8,6 @@
 
 # testing
 /coverage
-/utils/apikey.ts
 
 # next.js
 /.next/
