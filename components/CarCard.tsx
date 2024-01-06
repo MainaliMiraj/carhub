@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { CarProps } from "@/types";
 import { CustomButton } from ".";
-import { calculateCarRent } from "@/utils";
+import { calculateCarRent, generateCarImageUrl } from "@/utils";
 import CarDetails from "./CarDetails";
 
 interface CarCardProps {
@@ -11,7 +11,7 @@ interface CarCardProps {
 }
 
 const CarCard = ({ car }: CarCardProps) => {
-    const [isOpen,setIsOpen]=useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const { city_mpg, year, make, model, transmission, drive } = car;
   const carRent = calculateCarRent(city_mpg, year);
   return (
@@ -29,7 +29,7 @@ const CarCard = ({ car }: CarCardProps) => {
       </p>
       <div className="relative w-full h-40 my-3 object-contain">
         <Image
-          src="/hero.png"
+          src={generateCarImageUrl(car)}
           alt="car-model"
           fill
           priority
@@ -64,13 +64,17 @@ const CarCard = ({ car }: CarCardProps) => {
           <CustomButton
             title="View More"
             containerStyle="w-full py-[16px] rounded-full bg-primary-blue"
-            textStyles='text-white text=[14px] leading-[17px] font-bold'
-            rightIcon='/right-arrow.svg'
-            handleClick={()=>setIsOpen(true)}
+            textStyles="text-white text=[14px] leading-[17px] font-bold"
+            rightIcon="/right-arrow.svg"
+            handleClick={() => setIsOpen(true)}
           />
         </div>
       </div>
-      <CarDetails isOpen={isOpen} closeModal={()=>setIsOpen(false)} car={car}/>
+      <CarDetails
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(false)}
+        car={car}
+      />
     </div>
   );
 };

@@ -1,12 +1,11 @@
 import { CarCard, CustomFilter, Hero, Searchbar } from "@/components";
 import Image from "next/image";
 /* set your api from 'https://rapidapi.com/apininjas/api/cars-by-api-ninjas' fetch the data and import the data to use here.*/
-import { fetchCars } from "../utils/FetchApi";
+import { fetchCars } from "../utils/index";
 
 export default async function Home() {
   const allCars = await fetchCars();
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
-  console.log(isDataEmpty);
   return (
     <main className="overflow-hidden">
       <Hero />
@@ -25,7 +24,7 @@ export default async function Home() {
           <section>
             <div className="home__cars-wrapper">
               {allCars.map((car) => (
-                <CarCard car={car}/>
+                <CarCard car={car} />
               ))}
             </div>
           </section>
