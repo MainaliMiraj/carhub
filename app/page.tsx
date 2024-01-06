@@ -3,8 +3,9 @@ import Image from "next/image";
 /* set your api from 'https://rapidapi.com/apininjas/api/cars-by-api-ninjas' fetch the data and import the data to use here.*/
 import { fetchCars } from "../utils/index";
 import { FilterProps } from "@/types";
+import { fuels, yearsOfProduction } from "@/constants";
 
-export default async function Home({ searchParams }){
+export default async function Home({ searchParams }) {
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer,
     year: searchParams.year || 2022,
@@ -25,8 +26,8 @@ export default async function Home({ searchParams }){
         <div className="home__filters">
           <Searchbar />
           <div className="home__filter-container"></div>
-          <CustomFilter />
-          <CustomFilter />
+          <CustomFilter title="fuel" options={fuels} />
+          <CustomFilter title="year" options={yearsOfProduction}/>
         </div>
         {!isDataEmpty ? (
           <section>
