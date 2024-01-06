@@ -2,10 +2,16 @@ import { CarCard, CustomFilter, Hero, Searchbar } from "@/components";
 import Image from "next/image";
 /* set your api from 'https://rapidapi.com/apininjas/api/cars-by-api-ninjas' fetch the data and import the data to use here.*/
 import { fetchCars } from "../utils/index";
-import { FilterProps } from "@/types";
-import { fuels, yearsOfProduction } from "@/constants";
 
-export default async function Home({ searchParams }) {
+import { fuels, yearsOfProduction } from "@/constants";
+import ShowMore from "@/components/ShowMore";
+import { FilterProps } from "@/types";
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: FilterProps;
+}) {
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer,
     year: searchParams.year || 2022,
@@ -27,7 +33,7 @@ export default async function Home({ searchParams }) {
           <Searchbar />
           <div className="home__filter-container"></div>
           <CustomFilter title="fuel" options={fuels} />
-          <CustomFilter title="year" options={yearsOfProduction}/>
+          <CustomFilter title="year" options={yearsOfProduction} />
         </div>
         {!isDataEmpty ? (
           <section>
@@ -40,11 +46,15 @@ export default async function Home({ searchParams }) {
         ) : (
           <div className="home__error-container">
             <h2 className="text-black text-xl font-bold">
-              oops... no result found
+              no results matched your search
             </h2>
             <p>{allCars?.message}</p>
           </div>
         )}
+        <ShowMore
+          pagesNumber={(searchParams.limit || 10) / 10}
+          isNext={(searchParams.limit || 10) > allCars.length}
+        />
       </div>
     </main>
   );
